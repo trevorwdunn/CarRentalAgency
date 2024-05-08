@@ -11,6 +11,7 @@ void addCar(std::vector<Car> &cars);
 bool deleteCar(std::vector<Car> &cars);
 void displayCar(std::vector<Car> &cars);
 void rentCar(std::vector<Car> &cars);
+void returnCar(std::vector<Car> &cars);
 
 int main() {
 	std::vector<Car> cars;
@@ -76,6 +77,7 @@ void displayMenu(std::vector<Car> &cars) {
 		break;
 	case 'r':
 		std::cout << "Return a car by id in inventory" << std::endl;
+		returnCar(cars);
 		break;
 	case 'q':
 		break;
@@ -141,6 +143,27 @@ void rentCar(std::vector<Car> &cars) {
 		} else {
 			it->toggleRented();
 			std::cout << "Car rented." << std::endl;
+		}
+	} else {
+		std::cout << "Car not found." << std::endl;
+	}
+	displayMenu(cars);
+}
+
+void returnCar(std::vector<Car> &cars) {
+	int id;
+	std::cout << "Enter the ID of the car you want to display: ";
+	std::cin >> id;
+
+	auto it = std::find_if(cars.begin(), cars.end(),
+						   [id](const Car &car) { return car.getID() == id; });
+
+	if (it != cars.end()) {
+		if (!it->isRented()) {
+			std::cout << "Car is already returned." << std::endl;
+		} else {
+			it->toggleRented();
+			std::cout << "Car returned." << std::endl;
 		}
 	} else {
 		std::cout << "Car not found." << std::endl;
