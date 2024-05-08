@@ -13,7 +13,6 @@ void displayCar(std::vector<Car> &cars);
 void rentCar(std::vector<Car> &cars);
 void returnCar(std::vector<Car> &cars);
 void displayInventory(std::vector<Car> &cars);
-// Not implemented Yet
 void updateCarCondition(std::vector<Car> &cars);
 
 int main() {
@@ -61,6 +60,7 @@ void displayMenu(std::vector<Car> &cars) {
 		break;
 	case 'd':
 		std::cout << "Delete a car by id from the inventory" << std::endl;
+		deleteCar(cars);
 		break;
 	case 'u':
 		std::cout << "Update a car by id condition in inventory" << std::endl;
@@ -109,6 +109,9 @@ void addCar(std::vector<Car> &cars) {
 	std::getline(std::cin, condition);
 
 	cars.push_back(Car(id, make, model, year, condition));
+	std::cout << "Car added to inventory." << std::endl;
+	std::cout << "Press any key to continue...";
+	std::cin.get(); // Wait for user to press a key
 }
 
 void displayCar(std::vector<Car> &cars) {
@@ -127,6 +130,9 @@ void displayCar(std::vector<Car> &cars) {
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
+	std::cout << "Press any key to continue...";
+	std::cin.ignore();
+	std::cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
@@ -148,6 +154,9 @@ void rentCar(std::vector<Car> &cars) {
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
+	std::cout << "Press any key to continue...";
+	std::cin.ignore();
+	std::cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
@@ -169,6 +178,9 @@ void returnCar(std::vector<Car> &cars) {
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
+	std::cout << "Press any key to continue...";
+	std::cin.ignore();
+	std::cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
@@ -197,5 +209,30 @@ void updateCarCondition(std::vector<Car> &cars) {
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
+	std::cout << "Press any key to continue...";
+	std::cin.ignore();
+	std::cin.get(); // Wait for user to press a key
 	displayMenu(cars);
+}
+
+bool deleteCar(std::vector<Car> &cars) {
+	int id;
+	bool result;
+	std::cout << "Enter the ID of the car you want to delete: ";
+	std::cin >> id;
+	auto it = std::find_if(cars.begin(), cars.end(),
+						   [id](const Car &car) { return car.getID() == id; });
+	if (it != cars.end()) {
+		// Car object found, call setCondition on it
+		cars.erase(it);
+		result = true;
+	} else {
+		std::cout << "Car not found." << std::endl;
+		result = false;
+	}
+	std::cout << "Press any key to continue...";
+	std::cin.ignore();
+	std::cin.get(); // Wait for user to press a key
+	displayMenu(cars);
+	return result;
 }
