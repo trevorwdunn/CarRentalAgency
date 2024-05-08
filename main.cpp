@@ -185,11 +185,17 @@ void returnCar(std::vector<Car> &cars) {
 }
 
 void displayInventory(std::vector<Car> &cars) {
+	std::cout << "Current Inventory:\n";
+	std::cout << "==================\n";
+
 	for (const auto &car : cars) {
-		std::cout << "Car ID: " << car.getID() << " Make: " << car.getMake()
-				  << " Model: " << car.getModel() << " Year: " << car.getYear()
-				  << " Condition: " << car.getCondition()
-				  << " Rented: " << car.isRented() << std::endl;
+		std::cout << "Car ID: " << car.getID() << " || "
+				  << " Make: " << car.getMake() << " || "
+				  << " Model: " << car.getModel() << " || "
+				  << " Year: " << car.getYear()
+				  << " Condition: " << car.getCondition() << " || "
+				  << " Rented: "
+				  << " || " << car.isRented() << std::endl;
 	}
 	std::cout << "Press any key to continue...";
 	std::cin.ignore();
