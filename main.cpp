@@ -12,6 +12,9 @@ bool deleteCar(std::vector<Car> &cars);
 void displayCar(std::vector<Car> &cars);
 void rentCar(std::vector<Car> &cars);
 void returnCar(std::vector<Car> &cars);
+// Not implemented Yet
+void updateCarCondition(std::vector<Car> &cars);
+void displayInventory(std::vector<Car> &cars);
 
 int main() {
 	std::vector<Car> cars;
@@ -31,19 +34,17 @@ void displayMenu(std::vector<Car> &cars) {
 	char choice = ' ';
 	do {
 
-		std::cout << "CAR RENTAL INVENTORY MENU" << std::endl;
-		std::cout << "-------------------------" << std::endl;
-		std::cout << "a) Add a car to inventory" << std::endl;
-		std::cout << "d) Delete a car by id from the inventory" << std::endl;
-		std::cout << "u) Update a car by id condition in inventory"
-				  << std::endl;
-		std::cout << "s) Display one car by id from inventory" << std::endl;
-		std::cout << "i) Display list of all cars in inventory" << std::endl;
-		std::cout << "c) Rent a car by id in inventory" << std::endl;
-		std::cout << "r) Return a car by id in inventory" << std::endl;
-		std::cout << "q) Quit" << std::endl;
+		std::cout << "CAR RENTAL AGENCY MENU" << std::endl;
+		std::cout << "a - Add car to inventory" << std::endl;
+		std::cout << "d - Delete car by id from inventory" << std::endl;
+		std::cout << "u - Update car by id condition in inventory" << std::endl;
+		std::cout << "s - Display one car by id from inventory" << std::endl;
+		std::cout << "i - Display list of all cars in inventory" << std::endl;
+		std::cout << "c - Rent a car by id in inventory" << std::endl;
+		std::cout << "r - Return a car by id to inventory" << std::endl;
+		std::cout << "q - Quit" << std::endl;
 
-		std::cout << "Enter your choice: ";
+		std::cout << "Choose an option: \n";
 		std::cin >> choice;
 		choice = std::tolower(choice);
 	}
@@ -84,6 +85,9 @@ void displayMenu(std::vector<Car> &cars) {
 	default:
 		std::cout << "Invalid choice. Please enter a valid option: \n";
 	}
+	if (choice != 'q') {
+		std::cout << "Done.\n";
+	}
 }
 
 void addCar(std::vector<Car> &cars) {
@@ -117,12 +121,10 @@ void displayCar(std::vector<Car> &cars) {
 						   [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
-		std::cout << "Car ID: " << it->getID() << std::endl;
-		std::cout << "Make: " << it->getMake() << std::endl;
-		std::cout << "Model: " << it->getModel() << std::endl;
-		std::cout << "Year: " << it->getYear() << std::endl;
-		std::cout << "Condition: " << it->getCondition() << std::endl;
-		std::cout << "Rented: " << it->isRented() << std::endl;
+		std::cout << "Car ID: " << it->getID() << " Make: " << it->getMake()
+				  << " Model: " << it->getModel() << " Year: " << it->getYear()
+				  << " Condition: " << it->getCondition()
+				  << " Rented: " << it->isRented() << std::endl;
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
@@ -169,4 +171,10 @@ void returnCar(std::vector<Car> &cars) {
 		std::cout << "Car not found." << std::endl;
 	}
 	displayMenu(cars);
+}
+
+void displayInventory(std::vector<Car> &cars) {
+	for (const auto &car : cars) {
+		displayCar(cars);
+	}
 }
