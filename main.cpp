@@ -123,10 +123,12 @@ void displayCar(std::vector<Car> &cars) {
 						   [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
-		std::cout << "Car ID: " << it->getID() << " Make: " << it->getMake()
-				  << " Model: " << it->getModel() << " Year: " << it->getYear()
-				  << " Condition: " << it->getCondition()
-				  << " Rented: " << it->isRented() << std::endl;
+		std::cout << "Car ID: " << it->getID() << " || "
+				  << "Make: " << it->getMake() << " || "
+				  << "Model: " << it->getModel() << " || "
+				  << "Year: " << it->getYear() << " || "
+				  << "Condition: " << it->getCondition() << " || "
+				  << "Rented: " << it->isRented() << std::endl;
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
