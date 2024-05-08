@@ -64,6 +64,7 @@ void displayMenu(std::vector<Car> &cars) {
 		break;
 	case 'u':
 		std::cout << "Update a car by id condition in inventory" << std::endl;
+		updateCarCondition(cars);
 		break;
 	case 's':
 		std::cout << "Display one car by id from inventory" << std::endl;
@@ -192,4 +193,5 @@ void updateCarCondition(std::vector<Car> &cars) {
 	} else {
 		std::cout << "Car not found." << std::endl;
 	}
+	displayMenu(cars);
 }
