@@ -5,18 +5,20 @@
 
 #include "car.h"
 
+using namespace std;
+
 bool isValidChoice(char choice);
-void displayMenu(std::vector<Car> &cars);
-void addCar(std::vector<Car> &cars);
-bool deleteCar(std::vector<Car> &cars);
-void displayCar(std::vector<Car> &cars);
-void rentCar(std::vector<Car> &cars);
-void returnCar(std::vector<Car> &cars);
-void displayInventory(std::vector<Car> &cars);
-void updateCarCondition(std::vector<Car> &cars);
+void displayMenu(vector<Car> &cars);
+void addCar(vector<Car> &cars);
+bool deleteCar(vector<Car> &cars);
+void displayCar(vector<Car> &cars);
+void rentCar(vector<Car> &cars);
+void returnCar(vector<Car> &cars);
+void displayInventory(vector<Car> &cars);
+void updateCarCondition(vector<Car> &cars);
 
 int main() {
-	std::vector<Car> cars;
+	vector<Car> cars;
 
 	displayMenu(cars);
 
@@ -29,23 +31,23 @@ bool isValidChoice(char choice) {
 		   choice == 'q';
 }
 
-void displayMenu(std::vector<Car> &cars) {
+void displayMenu(vector<Car> &cars) {
 	char choice = ' ';
 	do {
 
-		std::cout << "CAR RENTAL AGENCY MENU" << std::endl;
-		std::cout << "a - Add car to inventory" << std::endl;
-		std::cout << "d - Delete car by id from inventory" << std::endl;
-		std::cout << "u - Update car by id condition in inventory" << std::endl;
-		std::cout << "s - Display one car by id from inventory" << std::endl;
-		std::cout << "i - Display list of all cars in inventory" << std::endl;
-		std::cout << "c - Rent a car by id in inventory" << std::endl;
-		std::cout << "r - Return a car by id to inventory" << std::endl;
-		std::cout << "q - Quit" << std::endl;
+		cout << "CAR RENTAL AGENCY MENU" << endl;
+		cout << "a - Add car to inventory" << endl;
+		cout << "d - Delete car by id from inventory" << endl;
+		cout << "u - Update car by id condition in inventory" << endl;
+		cout << "s - Display one car by id from inventory" << endl;
+		cout << "i - Display list of all cars in inventory" << endl;
+		cout << "c - Rent a car by id in inventory" << endl;
+		cout << "r - Return a car by id to inventory" << endl;
+		cout << "q - Quit" << endl;
 
-		std::cout << "Choose an option: \n";
-		std::cin >> choice;
-		choice = std::tolower(choice);
+		cout << "Choose an option: \n";
+		cin >> choice;
+		choice = tolower(choice);
 	}
 
 	while (choice != 'q' && choice != 'a' && choice != 'd' && choice != 'u' &&
@@ -54,193 +56,196 @@ void displayMenu(std::vector<Car> &cars) {
 	// Process the user's choice
 	switch (choice) {
 	case 'a':
-		std::cout << "Add a car to inventory" << std::endl;
+		cout << "Add a car to inventory" << endl;
 		addCar(cars);
 		displayMenu(cars);
 		break;
 	case 'd':
-		std::cout << "Delete a car by id from the inventory" << std::endl;
+		cout << "Delete a car by id from the inventory" << endl;
 		deleteCar(cars);
 		break;
 	case 'u':
-		std::cout << "Update a car by id condition in inventory" << std::endl;
+		cout << "Update a car by id condition in inventory" << endl;
 		updateCarCondition(cars);
 		break;
 	case 's':
-		std::cout << "Display one car by id from inventory" << std::endl;
+		cout << "Display one car by id from inventory" << endl;
 		displayCar(cars);
 		break;
 	case 'i':
-		std::cout << "Display list of all cars in inventory" << std::endl;
+		cout << "Display list of all cars in inventory" << endl;
 		displayInventory(cars);
 		break;
 	case 'c':
-		std::cout << "Rent a car by id in inventory" << std::endl;
+		cout << "Rent a car by id in inventory" << endl;
 		rentCar(cars);
 		break;
 	case 'r':
-		std::cout << "Return a car by id in inventory" << std::endl;
+		cout << "Return a car by id in inventory" << endl;
 		returnCar(cars);
 		break;
 	case 'q':
 		break;
 	default:
-		std::cout << "Invalid choice. Please enter a valid option: \n";
+		cout << "Invalid choice. Please enter a valid option: \n";
 	}
 }
 
-void addCar(std::vector<Car> &cars) {
+void addCar(vector<Car> &cars) {
 	int id;
-	std::string make, model, condition;
+	string make, model, condition;
 	int year;
 
-	std::cout << "ADD CAR TO INVENTORY\n"
-			  << "Enter an ID: ";
-	std::cin >> id;
-	std::cin.ignore();
-	std::cout << "Enter the make: ";
-	std::getline(std::cin, make);
-	std::cout << "Enter the model: ";
-	std::getline(std::cin, model);
-	std::cout << "Enter the year: ";
-	std::cin >> year;
-	std::cout << "Enter the condition (new, slightly_used, used): ";
-	std::cin.ignore();
-	std::getline(std::cin, condition);
+	cout << "ADD CAR TO INVENTORY\n"
+		 << "Enter an ID: ";
+	cin >> id;
+	cin.ignore();
+	cout << "Enter the make: ";
+	getline(cin, make);
+	cout << "Enter the model: ";
+	getline(cin, model);
+	cout << "Enter the year: ";
+	cin >> year;
+	cout << "Enter the condition (new, slightly_used, used): ";
+	cin.ignore();
+	getline(cin, condition);
 
 	cars.push_back(Car(id, make, model, year, condition));
-	std::cout << "Car added to inventory." << std::endl;
-	std::cout << "Press any key to continue...";
-	std::cin.get(); // Wait for user to press a key
+	cout << "Car added to inventory." << endl;
+	cout << "Press any key to continue...";
+	cin.get(); // Wait for user to press a key
 }
 
-void displayCar(std::vector<Car> &cars) {
+void displayCar(vector<Car> &cars) {
 	int id;
-	std::cout << "Enter the ID of the car you want to display: ";
-	std::cin >> id;
+	cout << "Enter the ID of the car you want to display: ";
+	cin >> id;
 
-	auto it = std::find_if(cars.begin(), cars.end(),
-						   [id](const Car &car) { return car.getID() == id; });
+	auto it = find_if(cars.begin(), cars.end(),
+					  [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
-		std::cout << "Car ID: " << it->getID() << " || "
-				  << "Make: " << it->getMake() << " || "
-				  << "Model: " << it->getModel() << " || "
-				  << "Year: " << it->getYear() << " || "
-				  << "Condition: " << it->getCondition() << " || "
-				  << "Rented: " << it->isRented() << std::endl;
+		cout << "Car ID: " << it->getID() << " || "
+			 << "Make: " << it->getMake() << " || "
+			 << "Model: " << it->getModel() << " || "
+			 << "Year: " << it->getYear() << " || "
+			 << "Condition: " << it->getCondition() << " || "
+			 << "Rented: " << it->isRented() << endl;
 	} else {
-		std::cout << "Car not found." << std::endl;
+		cout << "Car not found." << endl;
 	}
-	std::cout << "Press any key to continue...";
-	std::cin.ignore();
-	std::cin.get(); // Wait for user to press a key
+	cout << "Press any key to continue...";
+	cin.ignore();
+	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
-void rentCar(std::vector<Car> &cars) {
+void rentCar(vector<Car> &cars) {
 	int id;
-	std::cout << "Enter the ID of the car you want to display: ";
-	std::cin >> id;
+	cout << "Enter the ID of the car you want to display: ";
+	cin >> id;
 
-	auto it = std::find_if(cars.begin(), cars.end(),
-						   [id](const Car &car) { return car.getID() == id; });
+	auto it = find_if(cars.begin(), cars.end(),
+					  [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
 		if (it->isRented()) {
-			std::cout << "Car is already rented." << std::endl;
+			cout << "Car is already rented." << endl;
 		} else {
 			it->toggleRented();
-			std::cout << "Car rented." << std::endl;
+			cout << "Car rented." << endl;
 		}
 	} else {
-		std::cout << "Car not found." << std::endl;
+		cout << "Car not found." << endl;
 	}
-	std::cout << "Press any key to continue...";
-	std::cin.ignore();
-	std::cin.get(); // Wait for user to press a key
+	cout << "Press any key to continue...";
+	cin.ignore();
+	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
-void returnCar(std::vector<Car> &cars) {
+void returnCar(vector<Car> &cars) {
 	int id;
-	std::cout << "Enter the ID of the car you want to display: ";
-	std::cin >> id;
+	cout << "Enter the ID of the car you want to display: ";
+	cin >> id;
 
-	auto it = std::find_if(cars.begin(), cars.end(),
-						   [id](const Car &car) { return car.getID() == id; });
+	auto it = find_if(cars.begin(), cars.end(),
+					  [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
 		if (!it->isRented()) {
-			std::cout << "Car is already returned." << std::endl;
+			cout << "Car is already returned." << endl;
 		} else {
 			it->toggleRented();
-			std::cout << "Car returned." << std::endl;
+			cout << "Car returned." << endl;
 		}
 	} else {
-		std::cout << "Car not found." << std::endl;
+		cout << "Car not found." << endl;
 	}
-	std::cout << "Press any key to continue...";
-	std::cin.ignore();
-	std::cin.get(); // Wait for user to press a key
+	cout << "Press any key to continue...";
+	cin.ignore();
+	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
-void displayInventory(std::vector<Car> &cars) {
-	std::cout << "Current Inventory:\n";
-	std::cout << "==================\n";
+void displayInventory(vector<Car> &cars) {
+	cout << "Current Inventory:\n";
+	cout << "==================\n";
 
 	for (const auto &car : cars) {
-		std::cout << "Car ID: " << car.getID() << " || "
-				  << " Make: " << car.getMake() << " || "
-				  << " Model: " << car.getModel() << " || "
-				  << " Year: " << car.getYear()
-				  << " Condition: " << car.getCondition() << " || "
-				  << " Rented: "
-				  << " || " << car.isRented() << std::endl;
+		cout << "Car ID: " << car.getID() << " || "
+			 << " Make: " << car.getMake() << " || "
+			 << " Model: " << car.getModel() << " || "
+			 << " Year: " << car.getYear()
+			 << " Condition: " << car.getCondition() << " || "
+			 << " Rented: "
+			 << " || " << car.isRented() << endl;
 	}
-	std::cout << "Press any key to continue...";
-	std::cin.ignore();
-	std::cin.get(); // Wait for user to press a key
+	cout << "Press any key to continue...";
+	cin.ignore();
+	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
-void updateCarCondition(std::vector<Car> &cars) {
+void updateCarCondition(vector<Car> &cars) {
 	int id;
-	std::cout << "Enter the ID of the car you want to update: ";
-	std::cin >> id;
-	auto it = std::find_if(cars.begin(), cars.end(),
-						   [id](const Car &car) { return car.getID() == id; });
+	string newCondition;
+	cout << "Enter the ID of the car you want to update: ";
+	cin >> id;
+	auto it = find_if(cars.begin(), cars.end(),
+					  [id](const Car &car) { return car.getID() == id; });
 	if (it != cars.end()) {
 		// Car object found, call setCondition on it
-		it->setCondition();
+		cout << "What is the new condition of the vehicle?";
+		cin >> newCondition;
+		it->setCondition(newCondition);
 	} else {
-		std::cout << "Car not found." << std::endl;
+		cout << "Car not found." << endl;
 	}
-	std::cout << "Press any key to continue...";
-	std::cin.ignore();
-	std::cin.get(); // Wait for user to press a key
+	cout << "Press any key to continue...";
+	cin.ignore();
+	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
 
-bool deleteCar(std::vector<Car> &cars) {
+bool deleteCar(vector<Car> &cars) {
 	int id;
 	bool result;
-	std::cout << "Enter the ID of the car you want to delete: ";
-	std::cin >> id;
-	auto it = std::find_if(cars.begin(), cars.end(),
-						   [id](const Car &car) { return car.getID() == id; });
+	cout << "Enter the ID of the car you want to delete: ";
+	cin >> id;
+	auto it = find_if(cars.begin(), cars.end(),
+					  [id](const Car &car) { return car.getID() == id; });
 	if (it != cars.end()) {
 		// Car object found, call setCondition on it
 		cars.erase(it);
 		result = true;
 	} else {
-		std::cout << "Car not found." << std::endl;
+		cout << "Car not found." << endl;
 		result = false;
 	}
-	std::cout << "Press any key to continue...";
-	std::cin.ignore();
-	std::cin.get(); // Wait for user to press a key
+	cout << "Press any key to continue...";
+	cin.ignore();
+	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 	return result;
 }
