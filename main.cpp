@@ -56,32 +56,24 @@ void displayMenu(vector<Car> &cars) {
 	// Process the user's choice
 	switch (choice) {
 	case 'a':
-		cout << "Add a car to inventory" << endl;
 		addCar(cars);
-		displayMenu(cars);
 		break;
 	case 'd':
-		cout << "Delete a car by id from the inventory" << endl;
 		deleteCar(cars);
 		break;
 	case 'u':
-		cout << "Update a car by id condition in inventory" << endl;
 		updateCarCondition(cars);
 		break;
 	case 's':
-		cout << "Display one car by id from inventory" << endl;
 		displayCar(cars);
 		break;
 	case 'i':
-		cout << "Display list of all cars in inventory" << endl;
 		displayInventory(cars);
 		break;
 	case 'c':
-		cout << "Rent a car by id in inventory" << endl;
 		rentCar(cars);
 		break;
 	case 'r':
-		cout << "Return a car by id in inventory" << endl;
 		returnCar(cars);
 		break;
 	case 'q':
@@ -112,7 +104,6 @@ void addCar(vector<Car> &cars) {
 
 	cars.push_back(Car(id, make, model, year, condition));
 	cout << "Car added to inventory." << endl;
-	cout << "Press any key to continue...";
 	cin.get(); // Wait for user to press a key
 }
 
@@ -134,7 +125,7 @@ void displayCar(vector<Car> &cars) {
 	} else {
 		cout << "Car not found." << endl;
 	}
-	cout << "Press any key to continue...";
+
 	cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
@@ -158,7 +149,7 @@ void rentCar(vector<Car> &cars) {
 	} else {
 		cout << "Car not found." << endl;
 	}
-	cout << "Press any key to continue...";
+
 	cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
@@ -182,7 +173,7 @@ void returnCar(vector<Car> &cars) {
 	} else {
 		cout << "Car not found." << endl;
 	}
-	cout << "Press any key to continue...";
+
 	cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
@@ -201,7 +192,7 @@ void displayInventory(vector<Car> &cars) {
 			 << " Rented: "
 			 << " || " << car.isRented() << endl;
 	}
-	cout << "Press any key to continue...";
+
 	cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
@@ -222,7 +213,7 @@ void updateCarCondition(vector<Car> &cars) {
 	} else {
 		cout << "Car not found." << endl;
 	}
-	cout << "Press any key to continue...";
+
 	cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
@@ -243,7 +234,7 @@ bool deleteCar(vector<Car> &cars) {
 		cout << "Car not found." << endl;
 		result = false;
 	}
-	cout << "Press any key to continue...";
+
 	cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
