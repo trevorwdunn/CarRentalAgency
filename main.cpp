@@ -179,6 +179,10 @@ void displayInventory(std::vector<Car> &cars) {
 				  << " Condition: " << car.getCondition()
 				  << " Rented: " << car.isRented() << std::endl;
 	}
+	std::cout << "Press any key to continue...";
+	std::cin.ignore();
+	std::cin.get(); // Wait for user to press a key
+	displayMenu(cars);
 }
 
 void updateCarCondition(std::vector<Car> &cars) {
