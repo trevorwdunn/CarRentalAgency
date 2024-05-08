@@ -12,9 +12,9 @@ bool deleteCar(std::vector<Car> &cars);
 void displayCar(std::vector<Car> &cars);
 void rentCar(std::vector<Car> &cars);
 void returnCar(std::vector<Car> &cars);
+void displayInventory(std::vector<Car> &cars);
 // Not implemented Yet
 void updateCarCondition(std::vector<Car> &cars);
-void displayInventory(std::vector<Car> &cars);
 
 int main() {
 	std::vector<Car> cars;
@@ -71,6 +71,7 @@ void displayMenu(std::vector<Car> &cars) {
 		break;
 	case 'i':
 		std::cout << "Display list of all cars in inventory" << std::endl;
+		displayInventory(cars);
 		break;
 	case 'c':
 		std::cout << "Rent a car by id in inventory" << std::endl;
@@ -84,9 +85,6 @@ void displayMenu(std::vector<Car> &cars) {
 		break;
 	default:
 		std::cout << "Invalid choice. Please enter a valid option: \n";
-	}
-	if (choice != 'q') {
-		std::cout << "Done.\n";
 	}
 }
 
@@ -175,6 +173,23 @@ void returnCar(std::vector<Car> &cars) {
 
 void displayInventory(std::vector<Car> &cars) {
 	for (const auto &car : cars) {
-		displayCar(cars);
+		std::cout << "Car ID: " << car.getID() << " Make: " << car.getMake()
+				  << " Model: " << car.getModel() << " Year: " << car.getYear()
+				  << " Condition: " << car.getCondition()
+				  << " Rented: " << car.isRented() << std::endl;
+	}
+}
+
+void updateCarCondition(std::vector<Car> &cars) {
+	int id;
+	std::cout << "Enter the ID of the car you want to update: ";
+	std::cin >> id;
+	auto it = std::find_if(cars.begin(), cars.end(),
+						   [id](const Car &car) { return car.getID() == id; });
+	if (it != cars.end()) {
+		// Car object found, call setCondition on it
+		it->setCondition();
+	} else {
+		std::cout << "Car not found." << std::endl;
 	}
 }
