@@ -159,7 +159,8 @@ void rentCar(vector<Car> &cars) {
 
 void returnCar(vector<Car> &cars) {
 	int id;
-	cout << "Enter the ID of the car you want to display: ";
+	cout << "RETURN CAR TO INVENTORY\n";
+	cout << "Enter the ID of the car to return:\n\n";
 	cin >> id;
 
 	auto it = find_if(cars.begin(), cars.end(),
@@ -167,13 +168,13 @@ void returnCar(vector<Car> &cars) {
 
 	if (it != cars.end()) {
 		if (!it->isRented()) {
-			cout << "Car is already returned." << endl;
+			cout << "Car has not been rented\n" << endl;
 		} else {
 			it->toggleRented();
-			cout << "Car returned." << endl;
+			cout << "Car returned successfully\n" << endl;
 		}
 	} else {
-		cout << "Car not found." << endl;
+		cout << "Car " << id << " not found in inventory\n" << endl;
 	}
 
 	// cin.ignore();
