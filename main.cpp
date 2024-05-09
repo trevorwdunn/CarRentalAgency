@@ -203,13 +203,14 @@ void displayInventory(vector<Car> &cars) {
 void updateCarCondition(vector<Car> &cars) {
 	int id;
 	string newCondition;
-	cout << "Enter the ID of the car you want to update: ";
+	cout << "UPDATE CAR CONDITION IN INVENTORY\n";
+	cout << "Enter the ID of the car to update condition:\n";
 	cin >> id;
 	auto it = find_if(cars.begin(), cars.end(),
 					  [id](const Car &car) { return car.getID() == id; });
 	if (it != cars.end()) {
 		// Car object found, call setCondition on it
-		cout << "What is the new condition of the vehicle?";
+		cout << "Enter the condition (new, slightly_used, used):\n\n";
 		cin >> newCondition;
 		it->setCondition(newCondition);
 	} else {
