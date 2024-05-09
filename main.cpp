@@ -111,19 +111,25 @@ void addCar(vector<Car> &cars) {
 
 void displayCar(vector<Car> &cars) {
 	int id;
-	cout << "Enter the ID of the car you want to display: ";
+	cout << "DISPLAY CAR IN INVENTORY\n";
+	cout << "Enter the ID of the car to display:\n\n";
 	cin >> id;
 
 	auto it = find_if(cars.begin(), cars.end(),
 					  [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
-		cout << "Car ID: " << it->getID() << " || "
-			 << "Make: " << it->getMake() << " || "
-			 << "Model: " << it->getModel() << " || "
-			 << "Year: " << it->getYear() << " || "
-			 << "Condition: " << it->getCondition() << " || "
-			 << "Rented: " << it->isRented() << endl;
+		if (!it->isRented()) {
+			cout << "ID: " << it->getID() << ", " << it->getMake() << " "
+				 << it->getModel() << ", " << it->getYear() << ", "
+				 << it->getCondition() << ", "
+				 << "is available\n" << endl;
+		} else {
+			cout << "ID: " << it->getID() << ", " << it->getMake() << " "
+				 << it->getModel() << ", " << it->getYear() << ", "
+				 << it->getCondition() << ", "
+				 << "not available\n" << endl;
+		}
 	} else {
 		cout << "Car not found." << endl;
 	}
