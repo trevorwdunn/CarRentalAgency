@@ -119,17 +119,10 @@ void displayCar(vector<Car> &cars) {
 					  [id](const Car &car) { return car.getID() == id; });
 
 	if (it != cars.end()) {
-		if (!it->isRented()) {
-			cout << "ID: " << it->getID() << ", " << it->getMake() << " "
-				 << it->getModel() << ", " << it->getYear() << ", "
-				 << it->getCondition() << ", "
-				 << "is available\n" << endl;
-		} else {
-			cout << "ID: " << it->getID() << ", " << it->getMake() << " "
-				 << it->getModel() << ", " << it->getYear() << ", "
-				 << it->getCondition() << ", "
-				 << "not available\n" << endl;
-		}
+		cout << "ID: " << it->getID() << ", " << it->getMake() << " "
+			 << it->getModel() << ", " << it->getYear() << ", "
+			 << it->getCondition() << ", "
+			 << (it->isRented() ? "not available\n" : "is available\n") << endl;
 	} else {
 		cout << "Car not found." << endl;
 	}
@@ -188,18 +181,15 @@ void returnCar(vector<Car> &cars) {
 }
 
 void displayInventory(vector<Car> &cars) {
-	cout << "Current Inventory:\n";
-	cout << "==================\n";
+	cout << "DISPLAY ALL CARS IN INVENTORY\n";
 
 	for (const auto &car : cars) {
-		cout << "Car ID: " << car.getID() << " || "
-			 << " Make: " << car.getMake() << " || "
-			 << " Model: " << car.getModel() << " || "
-			 << " Year: " << car.getYear()
-			 << " Condition: " << car.getCondition() << " || "
-			 << " Rented: "
-			 << " || " << car.isRented() << endl;
+		cout << "ID: " << car.getID() << ", " << car.getMake() << " "
+			 << car.getModel() << ", " << car.getYear() << ", "
+			 << car.getCondition() << ", "
+			 << (car.isRented() ? "not available" : "is available") << endl;
 	}
+	cout << endl;
 
 	// cin.ignore();
 	cin.get(); // Wait for user to press a key
