@@ -25,8 +25,6 @@ bool Car::isRented() const { return rented; }
 
 // Setters
 string Car::setCondition(std::string newCondition) {
-	cout << "Enter the new condition of the car: ";
-	cin >> newCondition;
 	condition = newCondition;
 	return condition;
 }

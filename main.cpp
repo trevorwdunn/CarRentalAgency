@@ -33,50 +33,55 @@ bool isValidChoice(char choice) {
 
 void displayMenu(vector<Car> &cars) {
 	char choice = ' ';
+	cout << "CAR RENTAL AGENCY MENU" << endl;
+	cout << "a - Add car to inventory" << endl;
+	cout << "d - Delete car by id from inventory" << endl;
+	cout << "u - Update car by id condition in inventory" << endl;
+	cout << "s - Display one car by id from inventory" << endl;
+	cout << "i - Display list of all cars in inventory" << endl;
+	cout << "c - Rent a car by id in inventory" << endl;
+	cout << "r - Return a car by id to inventory" << endl;
+	cout << "q - Quit" << endl;
 	do {
-
-		cout << "CAR RENTAL AGENCY MENU" << endl;
-		cout << "a - Add car to inventory" << endl;
-		cout << "d - Delete car by id from inventory" << endl;
-		cout << "u - Update car by id condition in inventory" << endl;
-		cout << "s - Display one car by id from inventory" << endl;
-		cout << "i - Display list of all cars in inventory" << endl;
-		cout << "c - Rent a car by id in inventory" << endl;
-		cout << "r - Return a car by id to inventory" << endl;
-		cout << "q - Quit" << endl;
-
-		cout << "Choose an option: \n";
+		cout << "Choose an option:\n\n";
 		cin >> choice;
 		choice = tolower(choice);
-	}
-
-	while (choice != 'q' && choice != 'a' && choice != 'd' && choice != 'u' &&
-		   choice != 's' && choice != 'i' && choice != 'c' && choice != 'r');
+	} while (choice != 'q' && choice != 'a' && choice != 'd' && choice != 'u' &&
+			 choice != 's' && choice != 'i' && choice != 'c' && choice != 'r');
 
 	// Process the user's choice
 	switch (choice) {
 	case 'a':
 		addCar(cars);
+		displayMenu(cars);
 		break;
 	case 'd':
 		deleteCar(cars);
+		displayMenu(cars);
 		break;
 	case 'u':
 		updateCarCondition(cars);
+		displayMenu(cars);
 		break;
 	case 's':
 		displayCar(cars);
+		displayMenu(cars);
 		break;
 	case 'i':
 		displayInventory(cars);
+		displayMenu(cars);
 		break;
 	case 'c':
 		rentCar(cars);
+		displayMenu(cars);
 		break;
 	case 'r':
 		returnCar(cars);
+		displayMenu(cars);
 		break;
 	case 'q':
+		cout << "Done\n";
+		exit(0);
 		break;
 	default:
 		cout << "Invalid choice. Please enter a valid option: \n";
@@ -89,22 +94,19 @@ void addCar(vector<Car> &cars) {
 	int year;
 
 	cout << "ADD CAR TO INVENTORY\n"
-		 << "Enter an ID: ";
+		 << "Enter an ID:\n";
 	cin >> id;
 	cin.ignore();
-	cout << "Enter the make: ";
+	cout << "Enter the make:\n";
 	getline(cin, make);
-	cout << "Enter the model: ";
+	cout << "Enter the model:\n";
 	getline(cin, model);
-	cout << "Enter the year: ";
+	cout << "Enter the year:\n";
 	cin >> year;
-	cout << "Enter the condition (new, slightly_used, used): ";
-	cin.ignore();
-	getline(cin, condition);
-
+	cout << "Enter the condition (new, slightly_used, used):\n\n";
+	cin >> condition;
 	cars.push_back(Car(id, make, model, year, condition));
-	cout << "Car added to inventory." << endl;
-	cin.get(); // Wait for user to press a key
+	// cin.get(); // Wait for user to press a key
 }
 
 void displayCar(vector<Car> &cars) {
@@ -126,9 +128,9 @@ void displayCar(vector<Car> &cars) {
 		cout << "Car not found." << endl;
 	}
 
-	cin.ignore();
+	// cin.ignore();
 	cin.get(); // Wait for user to press a key
-	displayMenu(cars);
+			   // displayMenu(cars);
 }
 
 void rentCar(vector<Car> &cars) {
@@ -150,7 +152,7 @@ void rentCar(vector<Car> &cars) {
 		cout << "Car not found." << endl;
 	}
 
-	cin.ignore();
+	// cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
@@ -174,7 +176,7 @@ void returnCar(vector<Car> &cars) {
 		cout << "Car not found." << endl;
 	}
 
-	cin.ignore();
+	// cin.ignore();
 	cin.get(); // Wait for user to press a key
 	displayMenu(cars);
 }
@@ -193,9 +195,9 @@ void displayInventory(vector<Car> &cars) {
 			 << " || " << car.isRented() << endl;
 	}
 
-	cin.ignore();
+	// cin.ignore();
 	cin.get(); // Wait for user to press a key
-	displayMenu(cars);
+			   // displayMenu(cars);
 }
 
 void updateCarCondition(vector<Car> &cars) {
@@ -214,15 +216,16 @@ void updateCarCondition(vector<Car> &cars) {
 		cout << "Car not found." << endl;
 	}
 
-	cin.ignore();
+	// cin.ignore();
 	cin.get(); // Wait for user to press a key
-	displayMenu(cars);
+			   // displayMenu(cars);
 }
 
 bool deleteCar(vector<Car> &cars) {
 	int id;
 	bool result;
-	cout << "Enter the ID of the car you want to delete: ";
+	cout << "REMOVE CAR FROM INVENTORY\n";
+	cout << "Enter the ID of the car to delete:\n\n";
 	cin >> id;
 	auto it = find_if(cars.begin(), cars.end(),
 					  [id](const Car &car) { return car.getID() == id; });
@@ -235,8 +238,7 @@ bool deleteCar(vector<Car> &cars) {
 		result = false;
 	}
 
-	cin.ignore();
+	// cin.ignore();
 	cin.get(); // Wait for user to press a key
-	displayMenu(cars);
 	return result;
 }
